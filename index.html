@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello</h1>
+    <form id="formElem">
+        <input id="formId" type="text" name="formId">
+        <input id="formName" type="text" name="formName">
+        <input type="submit"/>
+        </form>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script>
+        formElem.onsubmit = async e =>{
+            e.prevemtDefault();
+            const data = {
+                id:formId.value,
+                name:formName.value
+            };
+       const Response = await axios.post('http://localhost:3000/user', data);
+       alert(Response.data.message);
+        };
+
+        async function fetchUsers(){
+            try{
+               const Response = await axios.get('http://localhost:3000/user');
+               console.log(Response.data);
+            }
+            catch(e){
+                console.log('Error',e);
+            }
+        }
+        fetchUsers();
+    </script>
+</body>
+</html>
